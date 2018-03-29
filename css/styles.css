@@ -1,5 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
+*{
+  box-sizing: border-box;
+}
 
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
@@ -92,12 +95,6 @@ nav h1 a {
     width: calc(50% - 80px);
 }
 
-/*large screen*/
-@media screen and (min-width: 992px) {
-  #breadcrumb {
-    width: 50%;
-  }
-
 /* Display list items side by side */
 #breadcrumb li {
     display: inline;
@@ -184,13 +181,13 @@ nav h1 a {
 }
 
 /* Small devices */
-@media screen and (min-width: 576px) {
+@media (min-width: 576px) {
   #restaurants-list li {
     max-width: 40%;
   }
 }
 /* Large devices (desktops, 992px and up)*/
-@media screen and (min-width: 992px) {
+@media (min-width: 992px) {
   #restaurants-list li {
     max-width: 30%;
   }

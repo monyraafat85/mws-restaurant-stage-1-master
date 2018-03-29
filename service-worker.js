@@ -3,6 +3,7 @@ var cached_file = [
         'js/main.js',
         'js/restaurant_info.js',
         'js/dbhelper.js',
+        'data/restaurants.json',
         'css/styles.css',
         'img/1.jpg',
         'img/2.jpg',
@@ -16,19 +17,19 @@ var cached_file = [
         'img/10.jpg'
 ];
 
-var Cached_name = 'mws-restaurant-stage-1-master-v1';
+var Cached_name = 'restaurant-static-v1';
 
+/*install*/
 self.addEventListener('install', function(event) {
   console.log('  service worker has installed ');
   event.waitUntil(
-    caches.open(Cached_name)
-    .then(function(cache) {
+    caches.open(Cached_name).then(function(cache) {
       return cache.addAll(cached_file);
     })
   );
 });
 
-
+/*fetch*/
 self.addEventListener('fetch', function(event) {
   console.log(event.request);
   event.respondWith(
@@ -37,3 +38,17 @@ self.addEventListener('fetch', function(event) {
     })
   );
 });
+
+/*activate*/
+self.addEventListener('activate', function (event) {
+    event.waitUntil(
+        caches.keys().then(function(cachesName){
+            return Promise.all(cachesName.filter(function(cacheName){
+                return cacheName.startsWith('restaurant-')&& cacheName!=Cached_name;
+                }).map(function(cacheName){
+                  return caches.delete(cacheName);
+                })
+                );
+          })
+        );
+  });

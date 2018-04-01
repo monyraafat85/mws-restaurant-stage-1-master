@@ -2,6 +2,8 @@
 <html>
 
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <link rel="stylesheet" href="css/styles.css">
   <title>Restaurant Reviews</title>
@@ -14,17 +16,17 @@
     </nav>
   </header>
 
-  <main id="maincontent">
-    <section id="map-container">
-      <div id="map"></div>
+  <main id="maincontent" role="main">
+    <section id="map-container" role="application">
+      <div id="map" aria-label="location_map"></div>
     </section>
     <section>
-      <div class="filter-options">
+      <div class="filter-options" role="form">
         <h2>Filter Results</h2>
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" role="listbox">
           <option value="all">All Neighborhoods</option>
         </select>
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" role="listbox">
           <option value="all">All Cuisines</option>
         </select>
       </div>
@@ -42,18 +44,15 @@
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
 
-</body>
+
 <script>
   /* Register service worker for offline viewing of site*/
-
-registerServiceWorker = () => {
-  if ( 'serviceWorker' in navigator ) {
-    navigator.serviceWorker.register('/service-worker.js').then(function(){
-      console.log('successed!');
-    }).catch(function() {
-      console.log(' failed!');
-    });
-  }
+ if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
 }
 </script>
+<!--end registeration-->
+</body>
 </html>

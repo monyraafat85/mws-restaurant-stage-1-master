@@ -21,10 +21,11 @@ var cached_file = [
 var Cached_name = 'restaurant-static-v1';
 
 /*install services worker*/
-self.addEventListener('install', function(ev) {
-  console.log('  service worker has installed ');
-  ev.waitUntil(
+self.addEventListener('install', function(e) {
+  console.log('Installation success');
+  e.waitUntil(
     caches.open(Cached_name).then(function(cache) {
+      console.log('Caching app shell');
       return cache.addAll(cached_file);
     })
   );
@@ -32,7 +33,7 @@ self.addEventListener('install', function(ev) {
 
 /*fetch services worker*/
 self.addEventListener('fetch', function(ev) {
-  console.log(ev.request);
+  console.log('Fetch', ev.request.url);
   ev.respondWith(
     caches.match(ev.request).then(function(response) {
       return response || fetch(ev.request);
@@ -41,15 +42,17 @@ self.addEventListener('fetch', function(ev) {
 });
 
 /*activate services worker*/
-self.addEventListener('activate', function (ev) {
-    ev.waitUntil(
-        caches.keys().then(function(caches_Name){
-            return Promise.all(caches_Name.filter(function(cache_Name){
-                return cache_Name.startsWith('restaurant-')&& cache_Name!=Cached_name;
-                }).map(function(cache_Name){
-                  return caches.delete(cache_Name);
-                })
-                );
-          })
-        );
-  });
+
+self.addEventListener('activate', function(e) {
+  console.log('Activated');
+  e.waitUntil(
+    caches.keys().then(function(caches_Name) {
+      return Promise.all(caches_Name.map(function(cache_Name) {
+        if (cache_Name!=Cached_name) {
+          return caches.delete(cache_Name);
+        }
+      }));
+    })
+  );
+  return self.clients.claim();
+});

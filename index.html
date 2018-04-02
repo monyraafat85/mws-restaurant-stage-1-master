@@ -12,7 +12,7 @@
 <body>
   <header>
     <nav>
-      <h1><a href="/">Restaurant <span>Reviews</span></a></h1>
+      <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
   </header>
 
@@ -22,12 +22,12 @@
     </section>
     <section>
       <div class="filter-options" role="form">
-        <h2>Filter Results</h2>
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" role="listbox">
-          <option value="all">All Neighborhoods</option>
+        <h3>Filter Results</h3>
+        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" role="listbox" aria-label="neighborhoods-select">
+          <option value="all" aria-label="All Neighborhoods">All Neighborhoods</option>
         </select>
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" role="listbox">
-          <option value="all">All Cuisines</option>
+        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" role="listbox" aria-label="cuisines-select">
+          <option value="all" aria-label="All Cuisines">All Cuisines</option>
         </select>
       </div>
       <ul id="restaurants-list"></ul>
@@ -44,15 +44,5 @@
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
 
-
-<script>
-  /* Register service worker for offline viewing of site*/
- if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js').then(function() 
-      { console.log('Registered');
-       });
-  }
-</script>
-<!--end registeration-->
 </body>
 </html>

@@ -15,14 +15,18 @@
   <!-- Beginning header -->
   <header>
     <!-- Beginning nav -->
-    <nav aria-label="Breadcrumb" class="breadcrumb">
+    <nav aria-label="Breadcrumb" class="title_bread">
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb"  role="presentation" >
-      <li><a href="/">Home</a></li>
-    </ul>
+    <nav aria-label="Breadcrumb"  class="breadcrumb">
+      <ol id="breadcrumb">
+      <li>
+      <a href="./index.html" aria-current="page">Home</a>
+       </li>
+      </ol>
     <!-- End breadcrumb -->
+    </nav>
     <!-- End nav -->
   </header>
   <!-- End header -->
@@ -37,7 +41,7 @@
     <!-- Beginning restaurant -->
     <section id="restaurant-container">
       <h2 id="restaurant-name"></h2>
-      <img id="restaurant-img" alt="Mission Chinese Food Restaurant">
+      <img id="restaurant-img">
       <p id="restaurant-cuisine"></p>
       <p id="restaurant-address"></p>
       <table id="restaurant-hours"></table>
@@ -58,6 +62,7 @@
   <!-- End footer -->
 
   <!-- Beginning scripts -->
+   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   <!-- Database helpers -->
   <script type="text/javascript" src="js/dbhelper.js"></script>
   <!-- Main javascript file -->
@@ -65,7 +70,18 @@
   <!-- Google Maps -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAI8vX_aWvDGxvr4WxwONs-Kd4bZ-jS8E&libraries=places&callback=initMap"></script>
   <!-- End scripts -->
+<script>
 
+  /* Register service worker for offline viewing of site*/
+  registerServiceWorker = () => {
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').then(function() 
+      { 
+        console.log('Service Worker Registered'); 
+      });
+  }
+}
+</script>
 </body>
 
 </html>

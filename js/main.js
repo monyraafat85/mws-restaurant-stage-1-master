@@ -4,6 +4,17 @@ let restaurants,
 var map
 var markers = []
 
+
+
+  /* Register service worker for offline viewing of site*/
+  registerServiceWorker = () => {
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').then(function() 
+      { 
+        console.log('Service Worker Registered'); 
+      });
+  }
+}
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
@@ -26,14 +37,6 @@ fetchNeighborhoods = () => {
   });
 }
 
-
-
-  /* Register service worker for offline viewing of site*/
-    if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-             .register('/service-worker.js')
-             .then(function() { console.log('Service Worker Registered'); });
-  }
 /**
  * Set neighborhoods HTML.
  */
@@ -145,13 +148,15 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  */
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
+  li.classList.add('restaurant');
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
+  image.alt = restaurant.name + " Restaurant";
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   li.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   li.append(name);
 

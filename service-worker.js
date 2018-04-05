@@ -1,3 +1,4 @@
+
 //cached all file in variables cached_file
 var cached_file = [
         '/',
@@ -6,6 +7,8 @@ var cached_file = [
         '/js/dbhelper.js',
         '/data/restaurants.json',
         '/css/styles.css',
+         'restaurant.html',
+         'index.html',
         '/img/1.jpg',
         '/img/2.jpg',
         '/img/3.jpg',
@@ -29,7 +32,6 @@ self.addEventListener('install', function(e) {
     })
   );
 });
-
 /*fetch services worker*/
 self.addEventListener('fetch', function(e) {
   console.log('Fetch', e.request.url);
@@ -39,9 +41,7 @@ self.addEventListener('fetch', function(e) {
     })
   );
 });
-
 /*activate services worker*/
-
 self.addEventListener('activate', function(e) {
   console.log('Activated');
   e.waitUntil(

@@ -19,7 +19,7 @@
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <nav aria-label="Breadcrumb" role="presentation" class="breadcrumb">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
       <ol id="breadcrumb">
       <li>
       <a href="./index.html" aria-current="page">Home</a>
@@ -71,15 +71,19 @@
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAI8vX_aWvDGxvr4WxwONs-Kd4bZ-jS8E&libraries=places&callback=initMap"></script>
   <!-- End scripts -->
 <script>
-  
-  /* Register service worker for offline viewing of site*/
-  registerServiceWorker = () => {
-    if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js').then(function() 
-      { 
-        console.log('Service Worker Registered'); 
-      });
-  }
+   /* Register service worker for offline viewing of site-*/
+  /*from https://developers.google.com/web/fundamentals/primers/service-workers/ */
+ 
+ if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+      // Registration was successful
+      console.log(' registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log(' registration failed: ', err);
+    });
+  });
 }
 </script>
 </body>

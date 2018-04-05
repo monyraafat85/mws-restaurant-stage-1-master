@@ -38,6 +38,7 @@
 
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
+  <script type="application/javascript" charset="utf-8" src="service-worker.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/jquery-3.2.1.min.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAI8vX_aWvDGxvr4WxwONs-Kd4bZ-jS8E&libraries=places&callback=initMap"></script>
 
@@ -45,6 +46,21 @@
   <footer id="footer">
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
-
+ <script>
+    /* Register service worker for offline viewing of site-*/
+  /*from https://developers.google.com/web/fundamentals/primers/service-workers/ */
+ 
+ if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+      // Registration was successful
+      console.log(' registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log(' registration failed: ', err);
+    });
+  });
+}
+ </script>
 </body>
 </html>
